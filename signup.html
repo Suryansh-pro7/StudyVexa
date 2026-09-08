@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudyVexa - Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Viga&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+</head>
+<style>
+  *{
+  padding: none;
+  margin: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body{
+  background-image: url(/hand_painted_blue_watercolour_texture_background_2804.jpg);
+ font-family: "Plus Jakarta Sans",
+sans-serif;
+font-optical-sizing: auto;
+font-weight: 200;
+font-style: normal;
+  }
+img{
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+a {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+    -webkit-user-drag: none;
+  user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  color: white;
+text-decoration: none;
+}
+
+/* Remove blue tap highlight from links and buttons */
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  outline: none;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Remove focus/active outline */
+a:focus,
+a:active,
+button:focus,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Optional: prevent text selection while tapping */
+button {
+  user-select: none;
+  -webkit-user-select: none;
+}
+nav{
+  background: linear-gradient(100deg, #00c0ff , #2118b8 ) ;
+  top: 0;
+  position: sticky;
+  height: 70px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  z-index: 1000;
+  
+}
+nav h3{
+  padding-top: 19px;
+  padding-right: 10px;
+}
+.logo{
+  padding-top: 15px;
+  padding-left: 10px;
+  font-size: 25px;
+}
+.container{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form{
+  background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(3px) saturate(120%);
+-webkit-backdrop-filter: blur(3px) saturate(120%);
+border: 1px solid rgba(255, 255, 255, 0.25);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+border-radius: 40px;
+height: 620px;
+width: 350px;
+transition: 0.3s;
+}
+form h3{
+  margin-left: 30px;
+  margin-top: 15px;
+}
+input{
+  width: 300px;
+  height: 60px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 2px solid #fff;
+  background: transparent;
+  border-radius: 50px;
+  font-size: 20px;
+  padding-left: 20px;
+}
+select{
+  width: 320px;
+height: 60px;
+margin-top: 20px;
+margin-left: 10px;
+border: 2px solid #fff;
+background: transparent;
+border-radius: 50px;
+font-size: 20px;
+}
+form h1{
+  text-align: center;
+  margin-top: 20px;
+}
+input:focus {
+  outline: none;
+}
+select:focus {
+  outline: none;
+}
+input::placeholder{
+  padding-left: 5px;
+  color: black;
+}
+
+.submit{
+  width: 320px;
+height: 60px;
+margin-top: 20px;
+margin-left: 12px;
+background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(3px) saturate(120%);
+-webkit-backdrop-filter: blur(3px) saturate(120%);
+border: 1px solid rgba(255, 255, 255, 0.25);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+border-radius: 40px;
+color: black;
+transition: 0.3s;
+font-size: 20px;
+}
+ .submit:hover{
+   transform: scale(1.1);
+ }
+ 
+</style>
+<body>
+  <nav>
+    <h3 class="logo">StudyVexa</h3>
+  <h3>Sign Up</h3>
+  </nav>
+<div class="container">
+   <form action="https://api.web3forms.com/submit" method="POST" id="signupForm">
+   <input type="hidden" name="access_key" value="02899dcc-0ef3-4373-9550-cbe461c75317">
+   <h1>SignUp</h1>
+   <input type="text" name="name" required placeholder="Name" id="name">
+   <input type="email" name="email" required placeholder="Email">
+   <input type="phone" name="Phone Number" required placeholder="Phone Number" />
+   <h3>Date of Birth</h3>
+   <input type="date" name="DOB" required placeholder="DOB">
+<select name="gender" required>
+  <option value="">Select Gender</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+</select>
+   <button class="submit" type="submit">Submit</button>
+ </form>
+</div>
+<script src="script.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

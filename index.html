@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>StudyVexa | Study Smarter not Harder </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Viga&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<style type="text/css" media="all">
+    *{
+  padding: none;
+  margin: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body{
+  background: linear-gradient(100deg, #00c0ff , #2118b8 ) ;
+  font-family: "Plus Jakarta Sans",
+sans-serif;
+font-optical-sizing: auto;
+font-weight: 200;
+font-style: normal;
+  }
+img{
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+a {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+    -webkit-user-drag: none;
+  user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  color: white;
+text-decoration: none;
+}
+
+/* Remove blue tap highlight from links and buttons */
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  outline: none;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: "Plus Jakarta Sans",
+sans-serif;
+font-optical-sizing: auto;
+font-weight: 200;
+font-style: normal;
+}
+
+/* Remove focus/active outline */
+a:focus,
+a:active,
+button:focus,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Optional: prevent text selection while tapping */
+button {
+  user-select: none;
+  -webkit-user-select: none;
+}
+nav{
+  background: linear-gradient(100deg, #00c0ff , #2118b8 ) ;
+  top: 0;
+  position: sticky;
+  height: 70px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  z-index: 1000;
+  
+}
+.logo{
+  padding-top: 15px;
+  padding-left: 10px;
+  font-size: 25px;
+}
+.signup{
+ margin-top: 14px;
+ margin-right: 5px;
+  background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(3px) saturate(120%);
+-webkit-backdrop-filter: blur(3px) saturate(120%);
+border: 1px solid rgba(255, 255, 255, 0.25);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  border-radius: 50px;
+  height: 40px;
+  width: 80px;
+  transition: 0.3s;
+}
+.signup:hover{
+  transform: scale(1.1);
+}
+.container{
+  background-image: url(/pexels-yankrukov-8199246.jpg);
+height: 800px;
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+}
+.container{
+  color: #fff;
+}
+.container button {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(3px) saturate(120%);
+  -webkit-backdrop-filter: blur(3px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  border-radius: 50px;
+  height: 50px;
+  width: 150px;
+  transition: 0.4s;
+  font-size: 15px;
+  margin-top: 50px;
+}
+.container button:hover{
+  transform: scale(1.1);
+}
+.headings{
+  padding-top: 80px;
+  padding-left: 20px;
+  font-size: 25px;
+
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+
+}
+.container1{
+  background: rgba(255, 255, 255, 0.10);
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+border: 1px solid rgba(255, 255, 255, 0.22);
+
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 1500px;
+}
+  
+.box{
+  color: #fff;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(3px) saturate(120%);
+-webkit-backdrop-filter: blur(3px) saturate(120%);
+border: 1px solid rgba(255, 255, 255, 0.25);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+border-radius: 50px;
+height: 300px;
+width: 350px;
+margin-top: 20px;
+}
+
+.box h1{
+  padding-top: 25px;
+}
+.box p {
+  padding-top: 25px;
+}
+.box button{
+  background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(3px) saturate(120%);
+-webkit-backdrop-filter: blur(3px) saturate(120%);
+border: 1px solid rgba(255, 255, 255, 0.25);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+border-radius: 50px;
+height: 50px;
+width: 150px;
+transition: 0.4s;
+font-size: 15px;
+margin-top: 50px;
+}
+button:hover{
+  transform: scale(1.1);
+}
+#greeting{
+  padding-top: 360px;
+  
+}
+
+/* ===== CHROME MOBILE FIX ===== */
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Chrome को elements की width बढ़ाने से रोकना */
+* {
+  max-width: 100%;
+}
+
+/* Navbar Chrome mobile fix */
+nav {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Main hero section */
+.container {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Heading को screen से बाहर जाने से रोकना */
+.headings {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+/* Cards section */
+.container1 {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Cards */
+.box {
+  max-width: calc(100vw - 30px);
+  box-sizing: border-box;
+}
+
+/* Chrome में text अपने आप बड़ा न हो */
+h1, h2, h3, p, a, button {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Mobile Chrome */
+@media screen and (max-width: 600px) {
+
+  .container {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .headings {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .box {
+    width: 350px;
+    max-width: calc(100vw - 30px);
+  }
+}
+footer{
+  background: #4879EF;
+  height: 200px;
+  color: #fff;
+  text-align: center;
+}
+footer h2 {
+  padding-top: 15px;
+}
+footer p{
+  margin: 13px;
+}
+
+</style>
+<body>
+  <nav>
+    <h3 class="logo">StudyVexa</h3>
+  <div class="links">
+    <a href="about.html">About Us</a>
+<button action="signup.html"class="signup" id="signup">Sign Up</button>
+  </div>
+  </nav>
+  <div class="container">
+<div class="headings">
+      <h2>Study smarter, not harder.</h2>
+     <h2> 8th Class Notes, Chapters & AI Study Assistant</h2>
+    <h3>— all in one place.</h3>
+  <a href="chatbot.html"><button>Use Chatbot</button></a>
+  <marquee id="greeting">Hello Guest, What do you want to learn today?</marquee>
+</div>
+  </div>
+    <div class="container1">
+     <div class="box">
+        <h1>Video Lectures</h1>
+        <p>Learn topics easily through video lectures and improve your understanding with visual explanations.</p>
+        <a href="videolecture.html"><button>Open</button></a>
+
+      </div>
+     <div class="box">
+        <h1>Chapter Notes</h1>
+        <p>Find well-organized notes for your subjects and chapters, making revision faster and easier.</p>
+        <a href="notes.html"><button>Open</button></a>
+      </div>
+     <div class="box">
+        <h1>Chatbot</h1>
+        <p>Ask questions, clear your doubts, and get simple explanations to make learning easier.</p>
+     <a href="chatbot.html"><button>Open</button></a>
+      </div>
+      <div class="box">
+        <h1>Calculator & Tools</h1>
+        <p> Access useful tools like Scientific Calculator, Unit Converter, and more—all in one place.</p>
+        <a href="calculator.html"><button>Open</button></a>
+      </div>
+    </div>   
+    <footer>
+      <h2>Contact Us</h2>
+      Email — suraj00721ab@gmail.com
+      <br />
+      <h2>Follow Us On</h2>
+<a href="https://www.instagram.com/suraj368542?stkn=MXZ1NGNxZTRxOWczZQ=="><i class="fa-brands fa-instagram"></i></a>
+<a href="https://youtube.com/@unknownguy-g9c?si=RODk1zQAd1350-ls"><i class="fa-brands fa-youtube"></i></a>
+      <br />
+ <p>Made by Suryansh</p>
+ <br />
+<p>© All Rights Reserved</p>
+    </footer>
+<script src="script.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

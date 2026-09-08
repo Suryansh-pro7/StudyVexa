@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Viga&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+  <title>StudyVexa - Chatbot</title>
+
+  <style>
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    body {
+      background: #fff;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      font-family: "Plus Jakarta Sans",
+sans-serif;
+font-optical-sizing: auto;
+font-weight: 200;
+font-style: normal;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    a {
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+      -webkit-tap-highlight-color: transparent;
+      color: white;
+      text-decoration: none;
+      -webkit-touch-callout: none;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      outline: none;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    a:focus,
+    a:active,
+    button:focus,
+    button:active {
+      outline: none;
+      box-shadow: none;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    nav {
+      background: linear-gradient(100deg, #00c0ff, #2118b8);
+      top: 0;
+      position: sticky;
+      height: 70px;
+      color: #fff;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+      z-index: 1000;
+    }
+
+    nav h3 {
+      padding-right: 10px;
+    }
+
+    .logo {
+      padding-left: 10px;
+      font-size: 25px;
+    }
+
+
+    /* ================= MAIN ================= */
+
+    .chat-container {
+      width: min(950px, 94%);
+      margin: 25px auto;
+      height: calc(100vh - 120px);
+
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 25px;
+
+      background: rgba(255,255,255,.35);
+
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.12),
+        inset 0 1px 1px rgba(255,255,255,.8);
+
+      overflow: hidden;
+    }
+
+
+    /* ================= CHAT HEADER ================= */
+
+    .chat-header {
+      padding: 18px 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: rgba(255,255,255,.25);
+      border-bottom: 1px solid rgba(255,255,255,.5);
+    }
+
+    .ai-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ai-icon {
+      width: 45px;
+      height: 45px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 22px;
+
+      background: linear-gradient(
+        135deg,
+        rgba(0,192,255,.7),
+        rgba(33,24,184,.8)
+      );
+
+      box-shadow:
+        0 5px 20px rgba(0,100,255,.25),
+        inset 0 1px rgba(255,255,255,.7);
+    }
+
+    .ai-title h2 {
+      font-size: 18px;
+      color: #111;
+    }
+
+    .online {
+      font-size: 12px;
+      color: #168a35;
+      margin-top: 3px;
+    }
+
+    .clear-btn {
+      padding: 9px 13px;
+      border-radius: 12px;
+
+      color: #222;
+
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(255,255,255,.7);
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .clear-btn:active {
+      transform: scale(.95);
+    }
+
+
+    /* ================= MESSAGES ================= */
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .message.bot {
+      justify-content: flex-start;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 13px 16px;
+
+      border-radius: 18px;
+
+      line-height: 1.5;
+      font-size: 15px;
+
+      word-wrap: break-word;
+    }
+
+    .bot .bubble {
+      color: #111;
+
+      background: rgba(255,255,255,.55);
+
+      border: 1px solid rgba(255,255,255,.7);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,.07),
+        inset 0 1px rgba(255,255,255,.8);
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      border-bottom-left-radius: 5px;
+    }
+
+    .user .bubble {
+      color: white;
+
+      background: linear-gradient(
+        135deg,
+        #00c0ff,
+        #2118b8
+      );
+
+      box-shadow: 0 8px 20px rgba(33,24,184,.2);
+
+      border-bottom-right-radius: 5px;
+    }
+
+
+    /* ================= QUICK QUESTIONS ================= */
+
+    .quick-area {
+      padding: 0 15px 10px;
+
+      display: flex;
+      gap: 8px;
+
+      overflow-x: auto;
+    }
+
+    .quick-btn {
+      flex-shrink: 0;
+
+      padding: 8px 12px;
+
+      border-radius: 20px;
+
+      color: #222;
+
+      background: rgba(255,255,255,.45);
+
+      border: 1px solid rgba(255,255,255,.7);
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .quick-btn:active {
+      transform: scale(.96);
+    }
+
+
+    /* ================= INPUT ================= */
+
+    .input-area {
+      padding: 13px;
+
+      display: flex;
+      gap: 10px;
+
+      background: rgba(255,255,255,.3);
+
+      border-top: 1px solid rgba(255,255,255,.5);
+
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    #question {
+      flex: 1;
+
+      height: 48px;
+
+      border: 1px solid rgba(255,255,255,.8);
+
+      border-radius: 15px;
+
+      padding: 0 16px;
+
+      outline: none;
+
+      font-size: 15px;
+
+      color: #111;
+
+      background: rgba(255,255,255,.65);
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    #question::placeholder {
+      color: #777;
+    }
+
+    #question:focus {
+      border-color: rgba(0,150,255,.6);
+      box-shadow: 0 0 0 3px rgba(0,150,255,.1);
+    }
+
+    .send-btn {
+      width: 52px;
+      height: 48px;
+
+      border-radius: 15px;
+
+      font-size: 20px;
+
+      background: linear-gradient(
+        135deg,
+        #00c0ff,
+        #2118b8
+      );
+
+      box-shadow: 0 7px 20px rgba(33,24,184,.2);
+    }
+
+    .send-btn:active {
+      transform: scale(.94);
+    }
+
+
+    /* ================= TYPING ================= */
+
+    .typing {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .typing span {
+      width: 6px;
+      height: 6px;
+
+      background: #555;
+
+      border-radius: 50%;
+
+      animation: typing 1s infinite;
+    }
+
+    .typing span:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    .typing span:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    @keyframes typing {
+
+      0%, 60%, 100% {
+        transform: translateY(0);
+      }
+
+      30% {
+        transform: translateY(-5px);
+      }
+
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media(max-width:600px) {
+
+      nav {
+        height: 65px;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      nav h3:last-child {
+        font-size: 16px;
+      }
+
+      .chat-container {
+        width: 96%;
+        height: calc(100vh - 95px);
+        margin: 15px auto;
+        border-radius: 20px;
+      }
+
+      .bubble {
+        max-width: 88%;
+        font-size: 14px;
+      }
+
+      .chat-header {
+        padding: 14px;
+      }
+
+      .messages {
+        padding: 14px;
+      }
+
+      .clear-btn {
+        font-size: 12px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav>
+
+    <h3 class="logo">StudyVexa</h3>
+
+    <h3>Chatbot</h3>
+
+  </nav>
+
+
+  <!-- ================= CHAT ================= -->
+
+  <div class="chat-container">
+
+
+    <div class="chat-header">
+
+      <div class="ai-title">
+
+        <div class="ai-icon">
+          🤖
+        </div>
+
+        <div>
+          <h2>StudyVexa AI</h2>
+          <div class="online">
+            ● Offline AI
+          </div>
+        </div>
+
+      </div>
+
+      <button
+        class="clear-btn"
+        onclick="clearChat()">
+        Clear
+      </button>
+
+    </div>
+
+
+    <div
+      class="messages"
+      id="messages">
+
+      <div class="message bot">
+
+        <div class="bubble">
+
+          👋 <b>Hello!</b><br><br>
+
+          मैं <b>StudyVexa AI</b> हूँ।  
+          मैं तुम्हारी पढ़ाई में मदद कर सकता हूँ। 📚
+
+          <br><br>
+
+          तुम मुझसे पूछ सकते हो:
+
+          <br><br>
+
+          • 2 + 2 कितना होगा?<br>
+          • Solar System क्या है?<br>
+          • India की capital क्या है?<br>
+          • Rajasthan की capital क्या है?<br>
+          • Earth के बारे में बताओ<br>
+          • Photosynthesis क्या है?<br>
+          • भारत में कितने states हैं?
+
+          <br><br>
+
+          💡 <b>Try asking me anything!</b>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- QUICK QUESTIONS -->
+
+    <div class="quick-area">
+
+      <button
+        class="quick-btn"
+        onclick="quickQuestion('भारत की राजधानी क्या है?')">
+        🇮🇳 India
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="quickQuestion('सभी planets के नाम बताओ')">
+        🪐 Planets
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="quickQuestion('भारत में कितने states हैं?')">
+        🗺️ States
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="quickQuestion('Photosynthesis क्या है?')">
+        🌱 Science
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="quickQuestion('2 + 2')">
+        🧮 Calculator
+      </button>
+
+    </div>
+
+
+    <!-- INPUT -->
+
+    <div class="input-area">
+
+      <input
+        type="text"
+        id="question"
+        placeholder="Ask StudyVexa AI..."
+        autocomplete="off">
+
+      <button
+        class="send-btn"
+        onclick="sendQuestion()">
+        ➤
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+<script>
+
+
+/* =====================================================
+   KNOWLEDGE DATABASE
+===================================================== */
+
+
+const knowledge = {
+
+
+  /* ================= GENERAL ================= */
+
+  "hello":
+    "Hello! 👋 मैं StudyVexa AI हूँ। पढ़ाई से जुड़ा कोई भी सवाल पूछो।",
+
+  "hi":
+    "Hi! 👋 बताओ, आज क्या पढ़ना है?",
+
+  "hey":
+    "Hey! 😊 अपना सवाल पूछो। मैं मदद करने की कोशिश करूँगा।",
+
+  "who are you":
+    "मैं StudyVexa का offline study chatbot हूँ। मैं बिना internet के कई educational questions के answers दे सकता हूँ।",
+
+  "what is studyvexa":
+    "StudyVexa एक educational platform है जिसका उद्देश्य students को पढ़ाई में useful tools और resources देना है।",
+
+
+  /* ================= INDIA ================= */
+
+  "capital of india":
+    "भारत की राजधानी <b>नई दिल्ली (New Delhi)</b> है। 🇮🇳",
+
+  "india capital":
+    "भारत की राजधानी <b>नई दिल्ली</b> है। 🇮🇳",
+
+  "president of india":
+    "भारत के राष्ट्रपति <b>द्रौपदी मुर्मू</b> हैं।",
+
+  "prime minister of india":
+    "भारत के प्रधानमंत्री <b>नरेंद्र मोदी</b> हैं।",
+
+  "national animal":
+    "भारत का राष्ट्रीय पशु <b>बाघ (Tiger)</b> है। 🐅",
+
+  "national bird":
+    "भारत का राष्ट्रीय पक्षी <b>मोर (Peacock)</b> है। 🦚",
+
+  "national flower":
+    "भारत का राष्ट्रीय फूल <b>कमल (Lotus)</b> है। 🌸",
+
+  "national fruit":
+    "भारत का राष्ट्रीय फल <b>आम (Mango)</b> है। 🥭",
+
+  "national game":
+    "भारत ने आधिकारिक रूप से किसी खेल को National Game घोषित नहीं किया है।",
+
+  "currency of india":
+    "भारत की currency <b>Indian Rupee (₹)</b> है।",
+
+  "how many states":
+    "भारत में वर्तमान में <b>28 राज्य</b> और <b>8 केंद्र शासित प्रदेश</b> हैं। 🇮🇳",
+
+
+  /* ================= PLANETS ================= */
+
+  "planets":
+    "हमारे Solar System में 8 planets हैं:<br><br>\
+    1. Mercury ☿<br>\
+    2. Venus ♀<br>\
+    3. Earth 🌍<br>\
+    4. Mars 🔴<br>\
+    5. Jupiter 🟠<br>\
+    6. Saturn 🪐<br>\
+    7. Uranus 🔵<br>\
+    8. Neptune 🔵",
+
+  "solar system":
+    "Solar System में Sun और उसके चारों ओर घूमने वाले planets, moons, asteroids और अन्य celestial objects शामिल हैं। ☀️",
+
+  "mercury":
+    "<b>Mercury</b> सूर्य के सबसे करीब और Solar System का सबसे छोटा planet है। ☿",
+
+  "venus":
+    "<b>Venus</b> सूर्य से दूसरा planet है और इसका आकार Earth के लगभग समान है। ♀",
+
+  "earth":
+    "<b>Earth</b> सूर्य से तीसरा planet है और अभी तक ज्ञात एकमात्र planet है जहाँ जीवन मौजूद है। 🌍",
+
+  "mars":
+    "<b>Mars</b> को Red Planet कहा जाता है क्योंकि इसकी surface पर iron minerals के कारण लाल रंग दिखाई देता है। 🔴",
+
+  "jupiter":
+    "<b>Jupiter</b> Solar System का सबसे बड़ा planet है। 🟠",
+
+  "saturn":
+    "<b>Saturn</b> अपने शानदार rings के लिए प्रसिद्ध है। 🪐",
+
+  "uranus":
+    "<b>Uranus</b> एक ice giant है और इसका axis बहुत ज्यादा tilted है। 🔵",
+
+  "neptune":
+    "<b>Neptune</b> Solar System का सबसे दूर स्थित major planet है। 🔵",
+
+  "sun":
+    "Sun एक star है और Solar System के केंद्र में स्थित है। इसकी gravity planets को orbit में रखती है। ☀️",
+
+  "moon":
+    "Moon पृथ्वी का प्राकृतिक satellite है। 🌙",
+
+
+  /* ================= SCIENCE ================= */
+
+  "photosynthesis":
+    "<b>Photosynthesis</b> वह प्रक्रिया है जिसमें green plants sunlight, water और carbon dioxide का उपयोग करके food बनाते हैं और oxygen release करते हैं। 🌱",
+
+  "gravity":
+    "Gravity वह force है जिसके कारण objects एक-दूसरे की ओर आकर्षित होते हैं। पृथ्वी की gravity हमें जमीन पर रखती है। 🌍",
+
+  "water":
+    "Water का chemical formula <b>H₂O</b> है।",
+
+  "oxygen":
+    "Oxygen का chemical symbol <b>O</b> है। यह respiration के लिए बहुत महत्वपूर्ण है।",
+
+  "carbon dioxide":
+    "Carbon dioxide का chemical formula <b>CO₂</b> है। Plants photosynthesis में इसका उपयोग करते हैं।",
+
+  "atom":
+    "Atom किसी element की सबसे छोटी इकाई है जो उस element के chemical properties को बनाए रखती है।",
+
+  "cell":
+    "Cell जीवों की basic structural और functional unit है।",
+
+  "dna":
+    "DNA का पूरा नाम <b>Deoxyribonucleic Acid</b> है। यह genetic information को store करता है।",
+
+
+  /* ================= MATH ================= */
+
+  "what is 2 + 2":
+    "2 + 2 = <b>4</b> ✅",
+
+  "2 plus 2":
+    "2 + 2 = <b>4</b> ✅",
+
+  "what is 3 - 7":
+    "3 - 7 = <b>-4</b> ✅",
+
+  "3 minus 7":
+    "3 - 7 = <b>-4</b> ✅",
+
+  "2 divided by 2":
+    "2 ÷ 2 = <b>1</b> ✅",
+
+  "2 divide by 2":
+    "2 ÷ 2 = <b>1</b> ✅",
+
+
+  /* ================= GEOGRAPHY ================= */
+
+  "largest country":
+    "क्षेत्रफल के हिसाब से दुनिया का सबसे बड़ा देश <b>Russia</b> है। 🌍",
+
+  "smallest country":
+    "क्षेत्रफल के हिसाब से दुनिया का सबसे छोटा देश <b>Vatican City</b> है।",
+
+  "largest ocean":
+    "दुनिया का सबसे बड़ा ocean <b>Pacific Ocean</b> है। 🌊",
+
+  "highest mountain":
+    "समुद्र तल से दुनिया का सबसे ऊँचा पर्वत <b>Mount Everest</b> है। 🏔️",
+
+
+  /* ================= HISTORY ================= */
+
+  "independence day":
+    "भारत का Independence Day हर साल <b>15 August</b> को मनाया जाता है। 🇮🇳",
+
+  "republic day":
+    "भारत का Republic Day हर साल <b>26 January</b> को मनाया जाता है। 🇮🇳",
+
+  "gandhi":
+    "Mahatma Gandhi भारतीय स्वतंत्रता आंदोलन के प्रमुख नेताओं में से एक थे।",
+
+  "taj mahal":
+    "Taj Mahal आगरा, उत्तर प्रदेश में स्थित एक प्रसिद्ध ऐतिहासिक monument है। इसे Mughal emperor Shah Jahan ने Mumtaz Mahal की याद में बनवाया था।",
+
+
+  /* ================= COMPUTER ================= */
+
+  "html":
+    "<b>HTML</b> का पूरा नाम HyperText Markup Language है। इसका उपयोग webpages की structure बनाने के लिए किया जाता है।",
+
+  "css":
+    "<b>CSS</b> का पूरा नाम Cascading Style Sheets है। इसका उपयोग webpages को style और design करने के लिए किया जाता है।",
+
+  "javascript":
+    "<b>JavaScript</b> एक programming language है जिसका उपयोग websites को interactive और dynamic बनाने के लिए किया जाता है।",
+
+  "what is ai":
+    "<b>AI (Artificial Intelligence)</b> ऐसी technology है जिसमें computers ऐसे tasks कर सकते हैं जिनमें सामान्यतः human intelligence की आवश्यकता होती है।",
+
+  "computer":
+    "Computer एक electronic device है जो data को process करके useful information देता है।"
+
+
+};
+
+
+/* =====================================================
+   INDIAN STATES
+===================================================== */
+
+
+const states = {
+
+  "andhra pradesh": "Amaravati",
+  "arunachal pradesh": "Itanagar",
+  "assam": "Dispur",
+  "bihar": "Patna",
+  "chhattisgarh": "Raipur",
+  "goa": "Panaji",
+  "gujarat": "Gandhinagar",
+  "haryana": "Chandigarh",
+  "himachal pradesh": "Shimla",
+  "jharkhand": "Ranchi",
+  "karnataka": "Bengaluru",
+  "kerala": "Thiruvananthapuram",
+  "madhya pradesh": "Bhopal",
+  "maharashtra": "Mumbai",
+  "manipur": "Imphal",
+  "meghalaya": "Shillong",
+  "mizoram": "Aizawl",
+  "nagaland": "Kohima",
+  "odisha": "Bhubaneswar",
+  "punjab": "Chandigarh",
+  "rajasthan": "Jaipur",
+  "sikkim": "Gangtok",
+  "tamil nadu": "Chennai",
+  "telangana": "Hyderabad",
+  "tripura": "Agartala",
+  "uttar pradesh": "Lucknow",
+  "uttarakhand": "Dehradun",
+  "west bengal": "Kolkata"
+
+};
+
+
+/* =====================================================
+   COUNTRIES
+===================================================== */
+
+
+const countries = {
+
+  "india": "New Delhi",
+  "usa": "Washington, D.C.",
+  "united states": "Washington, D.C.",
+  "china": "Beijing",
+  "japan": "Tokyo",
+  "russia": "Moscow",
+  "france": "Paris",
+  "germany": "Berlin",
+  "italy": "Rome",
+  "canada": "Ottawa",
+  "australia": "Canberra",
+  "brazil": "Brasília",
+  "nepal": "Kathmandu",
+  "bhutan": "Thimphu",
+  "bangladesh": "Dhaka",
+  "pakistan": "Islamabad",
+  "uk": "London",
+  "united kingdom": "London",
+  "south korea": "Seoul",
+  "saudi arabia": "Riyadh",
+  "uae": "Abu Dhabi",
+  "egypt": "Cairo",
+  "spain": "Madrid",
+  "portugal": "Lisbon",
+  "greece": "Athens",
+  "new zealand": "Wellington",
+  "singapore": "Singapore",
+  "malaysia": "Kuala Lumpur",
+  "thailand": "Bangkok"
+
+};
+
+
+/* =====================================================
+   UTILITY FUNCTIONS
+===================================================== */
+
+
+function normalize(text) {
+
+  return text
+    .toLowerCase()
+    .replace(/[?!.。,]/g, "")
+    .trim();
+
+}
+
+
+/* =====================================================
+   CALCULATOR
+===================================================== */
+
+
+function calculate(text) {
+
+  let expression = text
+    .toLowerCase()
+    .replace(/what is/g, "")
+    .replace(/calculate/g, "")
+    .replace(/equals/g, "")
+    .replace(/equal to/g, "")
+    .replace(/plus/g, "+")
+    .replace(/minus/g, "-")
+    .replace(/times/g, "*")
+    .replace(/multiplied by/g, "*")
+    .replace(/divided by/g, "/")
+    .replace(/divide by/g, "/")
+    .replace(/×/g, "*")
+    .replace(/÷/g, "/")
+    .replace(/[^0-9+\-*/().%\s]/g, "")
+    .trim();
+
+  if (!expression) return null;
+
+  /*
+    Safety:
+    सिर्फ mathematical characters allow किए गए हैं।
+  */
+
+  if (!/^[0-9+\-*/().%\s]+$/.test(expression)) {
+    return null;
+  }
+
+  try {
+
+    let result = Function(
+      '"use strict"; return (' + expression + ')'
+    )();
+
+    if (
+      typeof result === "number" &&
+      Number.isFinite(result)
+    ) {
+
+      return result;
+
+    }
+
+  } catch (error) {
+
+    return null;
+
+  }
+
+  return null;
+
+}
+
+
+/* =====================================================
+   GET AI ANSWER
+===================================================== */
+
+
+function getAnswer(question) {
+
+  const q = normalize(question);
+
+
+  /* ---------- Calculator ---------- */
+
+  const mathResult = calculate(q);
+
+  if (mathResult !== null) {
+
+    return "🧮 Answer: <b>" + mathResult + "</b> ✅";
+
+  }
+
+
+  /* ---------- Exact knowledge ---------- */
+
+  if (knowledge[q]) {
+
+    return knowledge[q];
+
+  }
+
+
+  /* ---------- Keyword search ---------- */
+
+  for (let key in knowledge) {
+
+    if (q.includes(key)) {
+
+      return knowledge[key];
+
+    }
+
+  }
+
+
+  /* ---------- State Capitals ---------- */
+
+  for (let state in states) {
+
+    if (q.includes(state)) {
+
+      return "🇮🇳 <b>" +
+        capitalize(state) +
+        "</b> की राजधानी <b>" +
+        states[state] +
+        "</b> है।";
+
+    }
+
+  }
+
+
+  /* ---------- Countries ---------- */
+
+  for (let country in countries) {
+
+    if (
+      q.includes("capital of " + country) ||
+      q.includes(country + " capital")
+    ) {
+
+      return "🌍 <b>" +
+        capitalize(country) +
+        "</b> की राजधानी <b>" +
+        countries[country] +
+        "</b> है।";
+
+    }
+
+  }
+
+
+  /* ---------- Special questions ---------- */
+
+  if (
+    q.includes("all states") ||
+    q.includes("all indian states") ||
+    q.includes("states of india") ||
+    q.includes("सभी राज्य")
+  ) {
+
+    let list = Object.keys(states)
+      .map((x, i) =>
+        (i + 1) + ". " + capitalize(x)
+      )
+      .join("<br>");
+
+    return "🇮🇳 भारत के 28 राज्यों की list:<br><br>" + list;
+
+  }
+
+
+  if (
+    q.includes("planets") ||
+    q.includes("planet names") ||
+    q.includes("सभी ग्रह")
+  ) {
+
+    return knowledge["planets"];
+
+  }
+
+
+  /* ---------- Greetings ---------- */
+
+  if (
+    q === "hello" ||
+    q === "hi" ||
+    q === "hey" ||
+    q === "hii" ||
+    q === "namaste"
+  ) {
+
+    return knowledge["hello"];
+
+  }
+
+
+  /* ---------- Unknown ---------- */
+
+  return `
+  🤔 मुझे इस सवाल का answer अभी offline database में नहीं मिला।
+
+  <br><br>
+
+  तुम इन topics के बारे में पूछ सकते हो:
+
+  <br><br>
+
+  📚 Science<br>
+  🧮 Mathematics<br>
+  🌍 Geography<br>
+  🇮🇳 India<br>
+  🪐 Solar System<br>
+  💻 Computer<br>
+  📖 History<br>
+  🗺️ States & Capitals<br>
+  🌎 Countries & Capitals
+
+  <br><br>
+
+  <b>Example:</b><br>
+  "What is gravity?"<br>
+  "Capital of Rajasthan?"<br>
+  "2 + 50"<br>
+  "Tell me about Mars"
+  `;
+
+}
+
+
+/* =====================================================
+   CAPITALIZE
+===================================================== */
+
+
+function capitalize(text) {
+
+  return text
+    .split(" ")
+    .map(word =>
+      word.charAt(0).toUpperCase() +
+      word.slice(1)
+    )
+    .join(" ");
+
+}
+
+
+/* =====================================================
+   ADD MESSAGE
+===================================================== */
+
+
+function addMessage(text, type) {
+
+  const messages =
+    document.getElementById("messages");
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    "message " + type;
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className =
+    "bubble";
+
+  bubble.innerHTML = text;
+
+  message.appendChild(bubble);
+
+  messages.appendChild(message);
+
+  messages.scrollTop =
+    messages.scrollHeight;
+
+}
+
+
+/* =====================================================
+   TYPING EFFECT
+===================================================== */
+
+
+function showTyping() {
+
+  const messages =
+    document.getElementById("messages");
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    "message bot";
+
+  message.id =
+    "typing-message";
+
+  message.innerHTML = `
+    <div class="bubble">
+      <div class="typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  `;
+
+  messages.appendChild(message);
+
+  messages.scrollTop =
+    messages.scrollHeight;
+
+}
+
+
+function removeTyping() {
+
+  const typing =
+    document.getElementById(
+      "typing-message"
+    );
+
+  if (typing) {
+
+    typing.remove();
+
+  }
+
+}
+
+
+/* =====================================================
+   SEND QUESTION
+===================================================== */
+
+
+function sendQuestion() {
+
+  const input =
+    document.getElementById("question");
+
+  const question =
+    input.value.trim();
+
+  if (!question) return;
+
+
+  addMessage(
+    question,
+    "user"
+  );
+
+  input.value = "";
+
+  showTyping();
+
+
+  setTimeout(() => {
+
+    removeTyping();
+
+    const answer =
+      getAnswer(question);
+
+    addMessage(
+      answer,
+      "bot"
+    );
+
+  }, 450);
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+
+document
+  .getElementById("question")
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key === "Enter") {
+
+        sendQuestion();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   QUICK QUESTION
+===================================================== */
+
+
+function quickQuestion(question) {
+
+  document
+    .getElementById("question")
+    .value = question;
+
+  sendQuestion();
+
+}
+
+
+/* =====================================================
+   CLEAR CHAT
+===================================================== */
+
+
+function clearChat() {
+
+  document
+    .getElementById("messages")
+    .innerHTML = `
+
+      <div class="message bot">
+
+        <div class="bubble">
+
+          🧹 Chat cleared!
+
+          <br><br>
+
+          अपना नया सवाल पूछो। 📚
+
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
